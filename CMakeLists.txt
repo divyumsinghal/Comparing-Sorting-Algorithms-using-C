@@ -10,6 +10,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
 
+
+add_executable(IGN_Popular_Games_Optimised
+        t6.c
+)
+
 add_executable(IGN_Popular_Games_YearWise
         t5.c
 )

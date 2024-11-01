@@ -7,10 +7,11 @@
 - [Project Structure](#project-structure)
 - [Tasks](#tasks)
     - [Task 1 - Array Generation](#task-1-array-generation)
-    - [Task 2 - Sorting Algorithms](#task-2---sorting-algorithms)
-    - [Task 3 - Algorithm Comparisons](#task-3---algorithm-comparisons)
-    - [Task 4 - Most Popular Games](#task-4---most-popular-games)
-    - [Task 5 - Most Popular Games by Year](#task-5---most-popular-games-by-year)
+    - [Task 2 - Sorting Algorithms](#task-2-sorting-algorithms)
+    - [Task 3 - Algorithm Comparisons](#task-3-algorithm-comparisons)
+    - [Task 4 - Most Popular Games](#task-4-most-popular-games)
+    - [Task 5 - Most Popular Games by Year](#task-5-most-popular-games-by-year)
+    - [Task 6 - Faster Most Popular Games](#task-6-faster-most-popular-games)
 - [CSV File Format](#csv-file-format)
 - [Conclusion](#conclusion)
 - [Author](#author)
@@ -27,7 +28,7 @@ The project revolve around looking at the complexity of each sorting algorithm a
 - The data was a randomly generated using `t1.c` and retrieved form `t4_ign.csv`.
 - Then, we used the sorting algorithms from `t2.c` to sort the data and compare the results.
 - In part four, we used `t4_ign.csv`, which was a file of various games over last 20 years and their scores.
-- This was stored efficiently in an array and in a matrix for `t5.c`.
+- This was stored efficiently in an array and in a matrix for `t5.c` and `t6.c`.
 - Struct called Game was made to efficiently store the data.
 
 ## Project Structure
@@ -37,6 +38,7 @@ The project revolve around looking at the complexity of each sorting algorithm a
 - **`t3.c`**: Comparison of sorting algorithms on various data patterns.
 - **`t4.c`**: Program to read and sort games from a CSV file and display the top 10 games by score.
 - **`t5.c`**: Extended functionality to categorize games by year and display the top 5 games per year.
+- **`t6.c`**: It is a more optimised way of doing the task 4 in o(n) time.
 - **`t4_ign.csv`**: CSV file containing video game data with columns: Title, Platform, Score, Year.
 
 ```
@@ -49,6 +51,7 @@ The project revolve around looking at the complexity of each sorting algorithm a
 ├── t3.c          # Testing and performance analysis
 ├── t4.c          # Read and sort games from a file
 ├── t5.c          # Categorize games by year sort them
+├── t6.c          # Same as task 4 but faster 
 ├── t4_ign.csv    # File containing video game data
 ```
 
@@ -86,6 +89,9 @@ In `t2.c`, three sorting algorithms were implemented:
     - Time Complexity: O(n log n) average case, O(n²) worst case.
     - Space Complexity: O(log n)
     - **Implementation**: A divide-and-conquer algorithm that recursively partitions the array around a chosen pivot.
+    - Due to the recursive calling, we do have some memory overheard despite sorting in place, but it makes the implementation simpler.
+    - I chose to pivot at arr[High] as this is the implementaion we looked at in the class & is straightforward.
+    - The advantage here is that we can have a simpler implementaion but the drawback is that it performs poorly on sorted arrays. 
 
 ### Task 3 - Algorithm Comparisons
 
@@ -142,8 +148,7 @@ sorted
 ```
 
 
-#### Performance Results
-Test results for arrays of size 10000:
+#### Performance Results & Comments
 
 ##### Selection Sort
 - Consistent performance across all input types
@@ -191,6 +196,9 @@ Game sorted
 10: Crashmo : Nintendo 3DS : 2012
 
 ```
+
+We can get similiar but different answers with different algorithms as they split the arrays in different ways, so if only one value of the struct is compared, it can result in various answers.
+algorithms split the arrays in different ways, so if only one value of the struct is compared, it can result in various answers.
 
 ### Task 5 - Most Popular Games By Year
 
@@ -372,9 +380,34 @@ Year 2016:
 10: Pro Evolution Soccer 2017 : Xbox One : 2016
 10: Pro Evolution Soccer 2017 : PlayStation 4 : 2016
 
-Total games processed: 18625
+
+```
 
 
+### Task 6 - Faster Most Popular Games
+
+- In `t6.c`, the code was written to read reviews from `t4_ign.csv` and store them in a Matrix thus eliminating the need to sort them.
+- This makes the code faster at the trade-off that it only works on exactly this kind of data (with scores form 0-10). 
+
+
+#### Results:
+The result upon running the code is given below.
+
+```commandline
+Starting
+file loaded
+looping through data
+Game sorted
+10: Undertale : Macintosh : 2016
+10: Undertale : PC : 2016
+10: The Witness : Xbox One : 2016
+10: The Witness : PC : 2016
+10: The Witness : PlayStation 4 : 2016
+10: Pro Evolution Soccer 2017 : Xbox One : 2016
+10: Pro Evolution Soccer 2017 : PlayStation 4 : 2016
+10: Odin Sphere Leifthrasir : PlayStation Vita : 2016
+10: Odin Sphere Leifthrasir : PlayStation 4 : 2016
+10: Inside : PC : 2016
 ```
 
 ## CSV File Format

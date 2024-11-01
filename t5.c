@@ -188,7 +188,6 @@ int main() {
         }
     }
 
-    printf("\nTotal games processed: %d\n", game_number);
     fclose(csv);
     return 0;
 }
